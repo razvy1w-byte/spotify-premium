@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spotify Premium - Get 90% Off Today Only</title>
+  <style>
+    :root{
+      --bg: #0f1419;
+      --card-bg: #ffffff;
+      --accent: #1DB954;
+      --accent-dark: #1aa34a;
+      --panel-radius: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{
+      max-width:760px;
+      margin:40px auto;
+      padding:28px;
+    }
+
+    .center {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:22px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      color: white;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      background: linear-gradient(45deg, #1DB954, #1ed760);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 10px 0 0 0;
+    }
+
+    /* Card image */
+    .card-wrap{
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+    .card-img{
+      width:100%;
+      max-width:380px;
+      border-radius:12px;
+      box-shadow: var(--shadow);
+      display:block;
+    }
+
+    /* Timer */
+    .timer {
+      width:100%;
+      max-width:640px;
+      margin-top:6px;
+      background: linear-gradient(90deg, #1DB954, #1aa34a);
+      color:white;
+      border-radius:10px;
+      padding:16px 20px;
+      text-align:center;
+      font-weight:700;
+      font-size:20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+    .timer .icon {
+      width:20px;
+      height:20px;
+      border:2px solid rgba(255,255,255,0.9);
+      border-radius:50%;
+      display:inline-grid;
+      place-items:center;
+    }
+
+    /* panels */
+    .panel {
+      width:100%;
+      background:var(--card-bg);
+      border-radius:var(--panel-radius);
+      padding:20px;
+      box-shadow: var(--shadow);
+      color:#0f172a;
+    }
+    h2 {
+      margin:0 0 12px 0;
+      font-size:20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .muted { color:#6b7280; font-size:14px; margin-top:6px; }
+
+    .step {
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      margin:12px 0;
+    }
+    .check {
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      background:transparent;
+      border:2px solid var(--accent);
+      color:var(--accent);
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      margin-top:2px;
+      flex-shrink:0;
+    }
+    .step p { margin:0; font-weight:600; color:#0f172a; }
+    .step a { display:block; margin-top:6px; font-size:13px; color:var(--accent); text-decoration:none; }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .feature {
+      text-align: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    /* Claim button */
+    .claim-wrap { width:100%; display:flex; justify-content:center; margin-top:10px; }
+    .claim {
+      display:inline-block;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      font-weight:800;
+      font-size:20px;
+      padding:16px 28px;
+      border-radius:12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      transition:background .15s ease, transform .08s ease;
+      width:100%;
+      max-width:640px;
+      text-align:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .claim-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+    .claim:hover{ background:var(--accent-dark); transform:translateY(-2px); }
+
+    /* Price box */
+    .price-box {
+      background: linear-gradient(45deg, #1DB954, #1ed760);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 15px 0;
+      box-shadow: var(--shadow);
+    }
+    .old-price {
+      text-decoration: line-through;
+      opacity: 0.8;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .new-price {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 10px 0;
+    }
+    .save {
+      background: white;
+      color: #1DB954;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 16px;
+      display: inline-block;
+    }
+    .price-note {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+
+    /* Lifetime badge */
+    .lifetime-badge {
+      background: #ff6b35;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 10px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* small screens */
+    @media (max-width:520px){
+      .container{ padding:18px; margin:18px auto; }
+      .timer{ font-size:18px; padding:12px 16px; }
+      .claim{ font-size:18px; padding:14px 20px; }
+      .header h1 { font-size: 2rem; }
+      .features { grid-template-columns: 1fr; }
+      .new-price { font-size: 36px; }
+      .old-price { font-size: 18px; }
+      .header-logo { width: 40px; height: 40px; }
+      .claim-logo { width: 24px; height: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container center">
+    <!-- Header -->
+    <div class="header">
+      <h1>
+        <img src="images/spotify-logo.png" alt="Spotify" class="header-logo">
+        Spotify Premium
+      </h1>
+      <p>Limited Time: 90% Discount for US Users</p>
+    </div>
+
+    <!-- Price Box -->
+    <div class="price-box">
+      <div class="old-price">$19.99/month</div>
+      <div class="new-price">$1.99/month</div>
+      <div class="save">SAVE 90%</div>
+      <div class="lifetime-badge">LIFETIME PRICE 🔥</div>
+      <div class="price-note">Pay only $1.99 forever - No price increases!</div>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer" aria-live="polite">
+      ⏱️<span id="countdown">20:00</span>
+    </div>
+
+    <!-- Claim Now button -->
+    <div class="claim-wrap">
+      <a class="claim" id="claimBtnTop" 
+         href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify"
+         target="_blank" 
+         rel="noopener noreferrer">
+          <img src="images/spotify-logo.png" alt="Spotify" class="claim-logo">
+          Get Spotify Premium - 90% Off
+      </a>
+    </div>
+
+    <!-- Features -->
+    <div class="panel">
+      <h2>✨ Premium Features</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🎧</div>
+          <h4>Ad-Free Music</h4>
+          <p class="muted">Listen without interruptions</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📱</div>
+          <h4>Offline Downloads</h4>
+          <p class="muted">Save music for offline listening</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h4>High Quality</h4>
+          <p class="muted">Enhanced audio quality</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h4>Unlimited Skips</h4>
+          <p class="muted">Skip as many tracks as you want</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Start Guide -->
+    <div class="panel" role="region" aria-labelledby="quickstart-heading">
+      <h2 id="quickstart-heading">🚀 How To Get Your Discount</h2>
+
+      <div class="step">
+        <div class="check">1</div>
+        <div>
+          <p>Click "Get Spotify Premium" button</p>
+          <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify">Secure discount page opens</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="check">2</div>
+        <div>
+          <p>Create your Spotify account</p>
+          <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify">Use valid email address</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="check">3</div>
+        <div>
+          <p>Enjoy Premium features instantly</p>
+          <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify">Start listening ad-free</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Questions -->
+    <div class="panel" style="margin-top:18px;" role="region" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">❓ Common Questions</h2>
+
+      <div style="margin-top:6px;">
+        <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify" style="color:var(--accent); font-weight:700; text-decoration:none;">Is this discount available in the USA?</a>
+        <p class="muted">Yes! This special offer is exclusively for US residents.</p>
+      </div>
+
+      <div style="margin-top:12px;">
+        <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify" style="color:var(--accent); font-weight:700; text-decoration:none;">How long does the $1.99 price last?</a>
+        <p class="muted">This is a LIFETIME price! You'll pay only $1.99 forever - no increases ever!</p>
+      </div>
+
+      <div style="margin-top:12px;">
+        <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify" style="color:var(--accent); font-weight:700; text-decoration:none;">Can I cancel anytime?</a>
+        <p class="muted">Yes! Cancel your subscription anytime without fees.</p>
+      </div>
+
+      <div style="margin-top:12px;">
+        <a href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify" style="color:var(--accent); font-weight:700; text-decoration:none;">What's included in Premium?</a>
+        <p class="muted">Ad-free music, offline downloads, better sound quality, and unlimited skips.</p>
+      </div>
+    </div>
+
+    <!-- Final Claim button -->
+    <div class="claim-wrap">
+      <a class="claim" id="claimBtn" 
+         href="https://getrewarrds.com/aff_c?offer_id=170&aff_id=134736&source=spotify"
+         target="_blank" 
+         rel="noopener noreferrer">
+         <img src="images/spotify-logo.png" alt="Spotify" class="claim-logo">
+         Get My 90% Discount - Only $1.99 Forever
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+      <div style="color: white; text-align: center; font-size: 14px;">
+        <div>🔒</div>
+        <div>Secure Payment</div>
+      </div>
+      <div style="color: white; text-align: center; font-size: 14px;">
+        <div>🛡️</div>
+        <div>SSL Protected</div>
+      </div>
+      <div style="color: white; text-align: center; font-size: 14px;">
+        <div>🇺🇸</div>
+        <div>US Only</div>
+      </div>
+      <div style="color: white; text-align: center; font-size: 14px;">
+        <div>💰</div>
+        <div>90% OFF</div>
+      </div>
+    </div>
+
+  <script>
+    // Countdown timer starting from 20 minutes (20*60 seconds)
+    (function(){
+      const startSeconds = 20 * 60;
+      let remaining = startSeconds;
+      const el = document.getElementById('countdown');
+
+      function formatTime(s){
+        const m = Math.floor(s/60);
+        const sec = s % 60;
+        return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+      }
+
+      el.textContent = formatTime(remaining);
+
+      const interval = setInterval(()=>{
+        remaining--;
+        if (remaining < 0) {
+          clearInterval(interval);
+          el.textContent = "00:00";
+          return;
+        }
+        el.textContent = formatTime(remaining);
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>
