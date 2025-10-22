@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Checkout</title>
+
+  <style>
+
+    /* RESETEAZĂ STILURILE DE BAZĂ */
+
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      -webkit-tap-highlight-color: transparent;
+
+    }
+
+
+
+    html, body {
+
+      height: 100%;
+
+      background-color: #fff;
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      color: #000;
+
+      overflow: hidden;
+
+    }
+
+
+
+    /* HEADER FIX */
+
+    header {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      right: 0;
+
+      height: 60px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 18px;
+
+      font-weight: 600;
+
+      background-color: #fff;
+
+      border-bottom: 1px solid #e6e6e6;
+
+      z-index: 100;
+
+      padding-top: env(safe-area-inset-top); /* pentru iPhone notch */
+
+    }
+
+
+
+    header .back {
+
+      position: absolute;
+
+      left: 16px;
+
+      font-size: 26px;
+
+      cursor: pointer;
+
+      line-height: 1;
+
+    }
+
+
+
+    /* CONȚINUT DERULANT */
+
+    main {
+
+      position: absolute;
+
+      top: 60px;
+
+      bottom: 100px;
+
+      left: 0;
+
+      right: 0;
+
+      overflow-y: auto;
+
+      padding: 16px;
+
+      -webkit-overflow-scrolling: touch;
+
+    }
+
+
+
+    /* === STILURI NOI (DIN PRIMUL SET DE IMAGINI) === */
+
+
+
+    h2 {
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+
+    }
+
+
+
+    .list-item {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding: 16px 0;
+
+      border-bottom: 1px solid #f0f0f0;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .list-item .left {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      font-weight: 500;
+
+    }
+
+
+
+    .list-item .right {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+
+    .list-item .arrow {
+
+      font-size: 22px;
+
+      color: #a0a0a0;
+
+      font-weight: 600;
+
+    }
+
+
+
+    /* Secțiunea de plată */
+
+    .payment-details {
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+    .payment-details strong {
+
+      font-weight: 600;
+
+      font-size: 16px;
+
+    }
+
+    .payment-details span {
+
+      font-size: 14px;
+
+      color: #545454;
+
+    }
+
+    .payment-icon {
+
+      position: relative;
+
+      width: 44px; /* Lățime pentru a cuprinde ambele */
+
+      height: 28px; /* Înălțime pentru a cuprinde ambele */
+
+    }
+
+    .payment-icon .icon {
+
+      position: absolute;
+
+      width: 28px;
+
+      height: 28px;
+
+      border-radius: 6px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-weight: 700;
+
+      line-height: 1;
+
+      border: 1px solid #fff;
+
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+    }
+
+    .payment-icon .icon-uber {
+
+      top: 0;
+
+      left: 0;
+
+      z-index: 2;
+
+      background-color: #000;
+
+      color: white;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+    }
+
+    .payment-icon .icon-card {
+
+      bottom: 0;
+
+      right: 0;
+
+      z-index: 1;
+
+      background-color: #fff;
+
+      /* Simulare logo Mastercard */
+
+      background-image: radial-gradient(circle at 7px 14px, #EB001B 7px, transparent 7px),
+
+                        radial-gradient(circle at 21px 14px, #F79E1B 7px, transparent 7px);
+
+      background-size: 28px 28px;
+
+      background-repeat: no-repeat;
+
+    }
+
+
+
+    /* Secțiunea factură */
+
+    .invoice-section {
+
+      padding: 16px 0 12px;
+
+      border-bottom: 1px solid #f0f0f0;
+
+    }
+
+    .invoice-links {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      font-size: 16px;
+
+      font-weight: 500;
+
+    }
+
+    .edit-link {
+
+      font-weight: 500;
+
+      color: #000;
+
+      cursor: pointer;
+
+    }
+
+    .tax-details {
+
+      font-size: 14px;
+
+      color: #545454;
+
+    }
+
+
+
+    /* Iconiță Promo */
+
+    .icon-promo-svg {
+
+        width: 24px;
+
+        height: 24px;
+
+        fill: #333;
+
+    }
+
+
+
+    /* Sumarul costurilor */
+
+    .cost-breakdown {
+
+      padding: 16px 0;
+
+    }
+
+    .cost-item {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      font-size: 16px;
+
+      color: #333;
+
+      margin-bottom: 14px;
+
+    }
+
+    .cost-item > span:first-child {
+
+        display: flex;
+
+        align-items: center;
+
+        color: #545454;
+
+    }
+
+    .cost-item > span:last-child {
+
+        font-weight: 500;
+
+    }
+
+    .info {
+
+      font-size: 14px;
+
+      color: #545454;
+
+      border: 1px solid #a0a0a0;
+
+      border-radius: 50%;
+
+      width: 16px;
+
+      height: 16px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-left: 6px;
+
+      font-family: serif;
+
+      font-style: italic;
+
+      cursor: pointer;
+
+      line-height: 1;
+
+    }
+
+    .cost-right {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+    }
+
+    .strikethrough {
+
+      text-decoration: line-through;
+
+      color: #545454;
+
+      font-weight: 400;
+
+    }
+
+    .cost-item.applied {
+
+      color: #05a357; /* Verde */
+
+      font-weight: 500;
+
+    }
+
+    .cost-item.applied > span:last-child {
+
+        font-weight: 500;
+
+        color: #05a357;
+
+    }
+
+    .cost-item.total {
+
+      font-size: 18px;
+
+      margin-top: 16px;
+
+      padding-top: 16px;
+
+      border-top: 1px solid #e6e6e6;
+
+      color: #000;
+
+    }
+
+    .cost-item.total > strong:first-child {
+
+        color: #000;
+
+    }
+
+    
+
+    /* === STILURI NOI (DIN AL DOILEA SET DE IMAGINI) === */
+
+    
+
+    .store-name {
+
+        font-size: 24px;
+
+        font-weight: 700;
+
+        margin-bottom: 20px;
+
+    }
+
+    
+
+    .cart-item {
+
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 16px;
+
+        padding-bottom: 20px;
+
+        margin-bottom: 20px;
+
+        border-bottom: 1px solid #f0f0f0;
+
+    }
+
+    
+
+    /* === STILUL PENTRU IMAGINEA PRODUSULUI (MODIFICAT) === */
+
+    img.item-image {
+
+        width: 80px;
+
+        height: 80px;
+
+        background-color: #f0f0f0; /* Culoare de rezervă */
+
+        border-radius: 8px;
+
+        flex-shrink: 0;
+
+        object-fit: cover; /* Asigură încadrarea corectă a pozei */
+
+    }
+
+    
+
+    .item-details {
+
+        flex: 1;
+
+        display: flex;
+
+        flex-direction: column;
+
+    }
+
+    
+
+    .item-name {
+
+        font-size: 17px;
+
+        font-weight: 600;
+
+        margin-bottom: 4px;
+
+    }
+
+    
+
+    .item-options {
+
+        font-size: 14px;
+
+        color: #545454;
+
+        line-height: 1.4;
+
+    }
+
+    
+
+    .item-price {
+
+        font-size: 15px;
+
+        font-weight: 500;
+
+        margin-top: 8px;
+
+    }
+
+    
+
+    .quantity-selector {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        width: 105px;
+
+        padding-top: 4px; /* Aliniere mai bună cu textul */
+
+    }
+
+    
+
+    .quantity-button {
+
+        width: 32px;
+
+        height: 32px;
+
+        border: none;
+
+        background-color: #f0f0f0;
+
+        border-radius: 50%;
+
+        font-size: 22px;
+
+        font-weight: 400;
+
+        color: #000;
+
+        cursor: pointer;
+
+        line-height: 1;
+
+    }
+
+    .quantity-button:active {
+
+        background-color: #e0e0e0;
+
+    }
+
+    
+
+    .quantity-num {
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+    }
+
+    
+
+    .trash-button {
+
+        font-size: 18px;
+
+        color: #545454;
+
+    }
+
+    
+
+    .add-items-button {
+
+        display: block;
+
+        width: 100%;
+
+        text-align: center;
+
+        padding: 16px 0;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        color: #000;
+
+        background-color: #fff;
+
+        border: none;
+
+        border-top: 1px solid #f0f0f0;
+
+        border-bottom: 1px solid #f0f0f0;
+
+        cursor: pointer;
+
+        margin: 16px 0;
+
+    }
+
+    
+
+    .utensils-item {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 16px 0;
+
+        border-bottom: 1px solid #f0f0f0;
+
+    }
+
+    .utensils-item .left {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        font-size: 16px;
+
+        font-weight: 500;
+
+    }
+
+    .utensils-item .icon {
+
+        font-size: 24px;
+
+    }
+
+    .utensils-item input[type="checkbox"] {
+
+        width: 24px;
+
+        height: 24px;
+
+        /* Stil custom pentru checkbox ar fi necesar aici */
+
+    }
+
+    
+
+    .gift-item {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 16px 0;
+
+        border-bottom: 8px solid #f0f0f0; /* Separator gros */
+
+        margin-bottom: 16px;
+
+    }
+
+    .gift-item .left {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+    }
+
+    .gift-item .icon {
+
+        font-size: 24px;
+
+    }
+
+    .gift-item-details {
+
+        display: flex;
+
+        flex-direction: column;
+
+    }
+
+    .gift-item-details strong {
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+    }
+
+    .gift-item-details span {
+
+        font-size: 14px;
+
+        color: #545454;
+
+    }
+
+
+
+    /* === SFÂRȘIT STILURI NOI === */
+
+
+
+
+
+    /* FOOTER FIX */
+
+    footer {
+
+      position: fixed;
+
+      bottom: 0;
+
+      left: 0;
+
+      right: 0;
+
+      background-color: #fff;
+
+      border-top: 1px solid #e6e6e6;
+
+      z-index: 100;
+
+      padding-bottom: env(safe-area-inset-bottom); /* pentru iPhone notch jos */
+
+    }
+
+
+
+    .saving {
+
+      background-color: #b37000; /* aurie */
+
+      color: white;
+
+      font-size: 14px;
+
+      text-align: center;
+
+      padding: 10px;
+
+      font-weight: 500;
+
+    }
+
+
+
+    .place-order {
+
+      display: block;
+
+      width: calc(100% - 32px);
+
+      margin: 10px auto 16px;
+
+      background-color: #000;
+
+      color: #fff;
+
+      text-align: center;
+
+      padding: 15px 0;
+
+      border-radius: 12px;
+
+      font-size: 17px;
+
+      font-weight: 600;
+
+      text-decoration: none;
+
+    }
+
+
+
+    .place-order:active {
+
+      background-color: #222;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <header>
+
+    <span class="back">←</span>
+
+    Checkout
+
+  </header>
+
+
+
+  <main>
+
+    
+
+    <h1 class="store-name">McDonald's®</h1>
+
+
+
+    <div class="cart-item">
+
+      <img class="item-image" src="images/fries-large.jpg" alt="Large French Fries">
+
+      <div class="item-details">
+
+        <span class="item-name">Medium French Fries</span>
+
+        <span class="item-options">
+
+          Select Option: Large French Fries ($1.00)
+
+          <br>
+
+          Large French Fries Comes With: Salt
+
+        </span>
+
+        <span class="item-price">$12.98</span>
+
+      </div>
+
+      <div class="quantity-selector">
+
+        <button class="quantity-button">-</button>
+
+        <span class="quantity-num">2</span>
+
+        <button class="quantity-button">+</button>
+
+      </div>
+
+    </div>
+
+    
+
+    <div class="cart-item">
+
+      <img class="item-image" src="images/apple-pie.jpg" alt="Apple Pie">
+
+      <div class="item-details">
+
+        <span class="item-name">Apple Pie</span>
+
+        <span class="item-options">
+
+          Select Option: Apple Pie
+
+        </span>
+
+        <span class="item-price">$8.07</span>
+
+      </div>
+
+      <div class="quantity-selector">
+
+        <button class="quantity-button">-</button>
+
+        <span class="quantity-num">3</span>
+
+        <button class="quantity-button">+</button>
+
+      </div>
+
+    </div>
+
+    
+
+    <div class="cart-item">
+
+      <img class="item-image" src="images/double-bacon-quarter-pounder.jpg" alt="Double Bacon Quarter Pounder">
+
+      <div class="item-details">
+
+        <span class="item-name">Double Bacon Quarter Pounder® with Cheese</span>
+
+        <span class="item-options">
+
+          Double Bacon Quarter Pounder® with Cheese Comes With: Ketchup, Slivered Onions, Pickle, American Cheese, 2 1/4 Lb Beef, 3 Half Strips Bacon, Salt, Sesame Seed Bun
+
+        </span>
+
+        <span class="item-price">$25.58</span>
+
+      </div>
+
+      <div class="quantity-selector">
+
+        <button class="quantity-button">-</button>
+
+        <span class="quantity-num">2</span>
+
+        <button class="quantity-button">+</button>
+
+      </div>
+
+    </div>
+
+    
+
+    <div class="cart-item">
+
+      <img class="item-image" src="images/big-mac-meal.jpg" alt="Big Mac Meal">
+
+      <div class="item-details">
+
+        <span class="item-name">Big Mac® Meal</span>
+
+        <span class="item-options">
+
+          Select Option: Big Mac® Large Meal ($1.10)
+
+          <br>
+
+          Select Drink: Large Coke®
+
+          <br>
+
+          Large Coke® Comes With: Ice
+
+          <br>
+
+          Big Mac® Comes With: Mac Sauce, Diced Onions, Shredded Lettuce, Pickle, American Cheese, 2 1/10 Lb Beef, Salt, Big Mac® Bun
+
+          <br>
+
+          Large French Fries Comes With: Salt
+
+        </span>
+
+        <span class="item-price">$15.89</span>
+
+      </div>
+
+      <div class="quantity-selector">
+
+        <button class="quantity-button trash-button">🗑</button>
+
+        <span class="quantity-num">1</span>
+
+        <button class="quantity-button">+</button>
+
+      </div>
+
+    </div>
+
+    
+
+    <div class="cart-item" style="border-bottom: none;">
+
+      <img class="item-image" src="images/fries-small.jpg" alt="Small French Fries">
+
+      <div class="item-details">
+
+        <span class="item-name">Medium French Fries</span>
+
+        <span class="item-options">
+
+          Select Option: Small French Fries (-$1.00)
+
+          <br>
+
+          Small French Fries Comes With: Salt
+
+        </span>
+
+        <span class="item-price">$4.49</span>
+
+      </div>
+
+      <div class="quantity-selector">
+
+        <button class="quantity-button trash-button">🗑</button>
+
+        <span class="quantity-num">1</span>
+
+        <button class="quantity-button">+</button>
+
+      </div>
+
+    </div>
+
+    
+
+    <button class="add-items-button">+ Add items</button>
+
+    
+
+    <div class="utensils-item">
+
+      <div class="left">
+
+        <span class="icon">🍴</span>
+
+        <span>Request utensils, etc.</span>
+
+      </div>
+
+      <input type="checkbox" />
+
+    </div>
+
+    
+
+    <div class="gift-item">
+
+      <div class="left">
+
+        <span class="icon">🎁</span>
+
+        <div class="gift-item-details">
+
+          <strong>Send as a gift</strong>
+
+          <span>And customize a digital card</span>
+
+        </div>
+
+      </div>
+
+      </div>
+
+
+
+
+
+    <section class="payment-section">
+
+      <h2>Payment</h2>
+
+      <div class="list-item">
+
+        <div class="left">
+
+          <div class="payment-icon">
+
+            <div class="icon icon-uber">Uber</div>
+
+            <div class="icon icon-card"></div>
+
+          </div>
+
+          <div class="payment-details">
+
+            <strong>Uber Credits: $750.00</strong>
+
+            <span>+ Mastercard ••••3209</span>
+
+          </div>
+
+        </div>
+
+        <div class="right">
+
+          <span class="arrow">&rsaquo;</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <div class="invoice-section">
+
+      <div class="invoice-links">
+
+        <span>Request an invoice</span>
+
+        <span class="edit-link">Edit</span>
+
+      </div>
+
+      <span class="tax-details">Add tax details</span>
+
+    </div>
+
+    
+
+    <div class="list-item">
+
+      <div class="left">
+
+        <svg class="icon-promo-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.58 12.24L12.24 20.58C11.85 20.97 11.34 21.17 10.83 21.17C10.32 21.17 9.81 20.97 9.42 20.58L2.42 13.58C1.63 12.79 1.63 11.52 2.42 10.73L9.42 3.73C9.81 3.34 10.32 3.14 10.83 3.14C11.34 3.14 11.85 3.34 12.24 3.73L20.58 12.07C20.97 12.46 21.17 12.97 21.17 13.48C21.17 13.01 20.97 12.63 20.58 12.24ZM10.83 4.83C10.58 4.83 10.33 4.93 10.14 5.12L3.14 12.12C2.95 12.31 2.85 12.56 2.85 12.81C2.85 13.06 2.95 13.31 3.14 13.5L10.14 20.5C10.33 20.69 10.58 20.79 10.83 20.79C11.08 20.79 11.33 20.69 11.52 20.5L19.86 12.16C20.05 11.97 20.15 11.72 20.15 11.47C20.15 11.22 20.05 10.97 19.86 10.78L12.86 3.78C12.67 3.59 12.42 3.49 12.17 3.49C11.92 3.49 11.67 3.59 11.48 3.78L10.83 4.43V4.83Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8.25 8.25C8.25 7.42 7.58 6.75 6.75 6.75C5.92 6.75 5.25 7.42 5.25 8.25C5.25 9.08 5.92 9.75 6.75 9.75C7.58 9.75 8.25 9.08 8.25 8.25Z" fill="currentColor"></path>
+
+        </svg>
+
+        <span>Add promo code</span>
+
+      </div>
+
+      <div class="right">
+
+        <span class="arrow">&rsaquo;</span>
+
+      </div>
+
+    </div>
+
+    
+
+    <section class="cost-breakdown">
+
+      <div class="cost-item">
+
+        <span>Subtotal</span>
+
+        <span>$65.00</span>
+
+      </div>
+
+      <div class="cost-item">
+
+        <span>Delivery Fee <span class="info">i</span></span>
+
+        <span class="cost-right"><span class="strikethrough">$5.29</span> $0.00</span>
+
+      </div>
+
+      <div class="cost-item">
+
+        <span>Service Fee <span class="info">i</span></span>
+
+        <span>$2.99</span>
+
+      </div>
+
+      <div class="cost-item applied">
+
+        <span>Uber Credits Applied</span>
+
+        <span>-$67.99</span>
+
+      </div>
+
+      <div class="cost-item total">
+
+        <strong>Total</strong>
+
+        <strong><span class="strikethrough">$67.99</span> $0.00</strong>
+
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+
+
+  <footer>
+
+    <div class="saving"> Saving $7.68 with Uber One</div>
+
+    <a href="#" class="place-order">Place order</a>
+
+  </footer>
+
+
+
+</body>
+
+</html>
